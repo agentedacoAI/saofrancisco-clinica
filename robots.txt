@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://saofranciscoclinica.com.br/sitemap.xml
+Sitemap: https://clinicasaofranciscogru.com.br/sitemap.xml
