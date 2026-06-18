@@ -25,7 +25,8 @@
 <meta property="og:title" content="Clínica Veterinária São Francisco | Guarulhos – Emergência 24h">
 <meta property="og:description" content="20 anos cuidando dos pets de Guarulhos. Oncologista USP, emergência 24h e a estrutura mais completa da região. +619 avaliações no Google.">
 <meta property="og:url" content="https://saofranciscoclinica.com.br/">
-<meta property="og:image" content="https://saofranciscoclinica.com.br/fachada.jpg">
+<meta property="og:image" content="https://saofranciscoclinica.com.br/clinica-veterinaria-sao-francisco-guarulhos.png">
+<meta property="og:image:alt" content="Fachada da Clínica Veterinária São Francisco em Guarulhos – SP">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Clínica Veterinária São Francisco">
 <meta property="business:contact_data:street_address" content="R. Nossa Sra. Mãe dos Homens, 692">
@@ -39,7 +40,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Clínica Veterinária São Francisco | Guarulhos – Emergência 24h">
 <meta name="twitter:description" content="20 anos cuidando dos pets de Guarulhos. Oncologista USP, emergência 24h e estrutura completa. +619 avaliações.">
-<meta name="twitter:image" content="https://saofranciscoclinica.com.br/fachada.jpg">
+<meta name="twitter:image" content="https://saofranciscoclinica.com.br/clinica-veterinaria-sao-francisco-guarulhos.png">
 
 <!-- ── JSON-LD: VeterinaryCare ── -->
 <script type="application/ld+json">
@@ -47,7 +48,7 @@
   "@context": "https://schema.org",
   "@type": "VeterinaryCare",
   "name": "Clínica Veterinária São Francisco",
-  "image": "https://saofranciscoclinica.com.br/fachada.jpg",
+  "image": "https://saofranciscoclinica.com.br/clinica-veterinaria-sao-francisco-guarulhos.png",
   "@id": "https://saofranciscoclinica.com.br/",
   "url": "https://saofranciscoclinica.com.br/",
   "telephone": "+551122290026",
@@ -150,7 +151,7 @@ nav.scrolled .nav-toggle span{background:var(--g1)}
 
 /* ── HERO ── */
 #hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:url('fachada.jpg') center/cover no-repeat;z-index:0}
+.hero-bg{position:absolute;inset:0;background:url('clinica-veterinaria-sao-francisco-guarulhos.png') center/cover no-repeat;z-index:0}
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,74,42,.92) 0%,rgba(27,74,42,.75) 55%,rgba(27,74,42,.45) 100%)}
 .hero-content{position:relative;z-index:1;padding:120px 5% 80px;max-width:700px}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);color:#fff;padding:.4rem 1rem;border-radius:50px;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.5rem}
@@ -268,6 +269,16 @@ h2.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5
 .emerg-cta{display:inline-flex;align-items:center;gap:.5rem;background:#fff;color:var(--td);padding:.85rem 1.8rem;border-radius:50px;font-weight:700;text-decoration:none;transition:all .25s;white-space:nowrap}
 .emerg-cta:hover{background:#86efac;transform:translateY(-2px)}
 
+/* ── ESTRUTURA ── */
+#estrutura{background:var(--gpu)}
+.structure-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.struct-card{position:relative;border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh);aspect-ratio:4/3}
+.struct-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.struct-card:hover img{transform:scale(1.06)}
+.struct-card .caption{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;background:linear-gradient(to top,rgba(27,74,42,.94),rgba(27,74,42,.45) 45%,transparent 72%);color:#fff}
+.struct-card .caption h3{font-size:1.05rem;font-weight:700;margin-bottom:.25rem}
+.struct-card .caption p{font-size:.82rem;color:rgba(255,255,255,.9);line-height:1.5}
+
 /* ── GALERIA ── */
 #galeria{background:#fff}
 .gallery-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.75rem}
@@ -363,6 +374,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.75);padding:3rem 5% 1.5rem}
 @media(max-width:680px){
   .gallery-grid{grid-template-columns:repeat(3,1fr);gap:.5rem}
   .gallery-grid img{height:130px}
+  .structure-grid{grid-template-columns:1fr}
   section{padding:3.5rem 6%}
   #stats{padding:1.25rem 6%}
   .section-header{margin-bottom:2rem}
@@ -449,6 +461,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.75);padding:3rem 5% 1.5rem}
   <div class="nav-links" id="navLinks">
     <a href="#sobre">Sobre</a>
     <a href="#servicos">Serviços</a>
+    <a href="#estrutura">Estrutura</a>
     <a href="#especialidades">Especialidades</a>
     <a href="#equipe">Equipe</a>
     <a href="#depoimentos">Depoimentos</a>
@@ -490,8 +503,9 @@ footer{background:var(--g1);color:rgba(255,255,255,.75);padding:3rem 5% 1.5rem}
   <div class="about-grid fade-in">
     <div class="about-img-wrap">
       <img class="about-img-main"
-        src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80"
-        alt="Clínica Veterinária São Francisco">
+        src="recepcao-clinica-veterinaria-guarulhos.png"
+        alt="Recepção da Clínica Veterinária São Francisco em Guarulhos com jardim e identidade visual"
+        loading="lazy">
       <div class="about-badge-float">
         <strong>2006</strong>
         <span>Fundada em<br>Guarulhos/SP</span>
@@ -537,6 +551,38 @@ footer{background:var(--g1);color:rgba(255,255,255,.75);padding:3rem 5% 1.5rem}
   <div style="text-align:center;margin-top:2.5rem">
     <a href="https://wa.me/5511950871596?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento." target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--g1);color:#fff;padding:.9rem 2rem;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;box-shadow:var(--sh)"><svg class="ic" style="width:18px;height:18px"><use href="#ic-chat"/></svg> Agendar para o meu pet agora</a>
     <p style="margin-top:.75rem;font-size:.82rem;color:var(--tg)">Respondemos em até 30 minutos · Atendemos hoje</p>
+  </div>
+</section>
+
+<!-- ESTRUTURA -->
+<section id="estrutura">
+  <div class="section-header center fade-in">
+    <div class="section-tag">Nossa estrutura</div>
+    <h2 class="section-title">Estrutura de hospital de verdade</h2>
+    <p class="section-sub">Não é uma clínica de bairro com pretensão de especializada. Veja por dentro a estrutura que nos torna referência em Guarulhos.</p>
+  </div>
+  <div class="structure-grid fade-in">
+    <div class="struct-card">
+      <img src="internacao-veterinaria-24h-guarulhos.png" alt="Internação veterinária 24h com gatil climatizado na Clínica São Francisco em Guarulhos" loading="lazy">
+      <div class="caption">
+        <h3>Internação 24h monitorada</h3>
+        <p>Baias individuais climatizadas, com controle de temperatura e acompanhamento contínuo da equipe.</p>
+      </div>
+    </div>
+    <div class="struct-card">
+      <img src="ultrassom-veterinario-guarulhos.png" alt="Sala de ultrassom veterinário com equipamento Philips em Guarulhos" loading="lazy">
+      <div class="caption">
+        <h3>Diagnóstico por imagem</h3>
+        <p>Ultrassom, raio-X digital e ecocardiograma com equipamentos de última geração e laudo no mesmo dia.</p>
+      </div>
+    </div>
+    <div class="struct-card">
+      <img src="centro-cirurgico-veterinario-guarulhos.png" alt="Centro cirúrgico veterinário equipado para cirurgias de alta complexidade em Guarulhos" loading="lazy">
+      <div class="caption">
+        <h3>Centro cirúrgico completo</h3>
+        <p>Sala equipada para cirurgias de alta complexidade, com foco cirúrgico, monitoração e ambiente esterilizado.</p>
+      </div>
+    </div>
   </div>
 </section>
 
