@@ -227,7 +227,7 @@ h2.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5
 
 /* ── TEAM ── */
 #equipe{background:var(--gpu)}
-.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
 .team-card{background:#fff;border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh);transition:all .25s}
 .team-card:hover{transform:translateY(-5px);box-shadow:var(--sh2)}
 .team-photo{aspect-ratio:3/4;overflow:hidden;background:linear-gradient(135deg,var(--g2),var(--g4))}
@@ -353,7 +353,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.75);padding:3rem 5% 1.5rem}
 @media(max-width:1100px){
   .services-grid{grid-template-columns:repeat(3,1fr)}
   .spec-grid{grid-template-columns:repeat(5,1fr)}
-  .team-grid{grid-template-columns:repeat(4,1fr)}
+  .team-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:960px){
   /* Nav vira menu hambúrguer */
@@ -640,6 +640,24 @@ footer{background:var(--g1);color:rgba(255,255,255,.75);padding:3rem 5% 1.5rem}
         <div class="role">Oncologia &amp; Cancerologia</div>
         <p>Doutor pela USP — o oncologista veterinário mais titulado de Guarulhos. Quando o diagnóstico é sério, você quer o melhor do estado ao lado do seu pet.</p>
         <span class="team-badge">Mestre Doutor USP</span>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo"><img src="dra-patricia-jezler-oftalmologista-veterinario-guarulhos.png" alt="Dra. Patrícia Jezler — oftalmologista veterinária na Clínica São Francisco em Guarulhos" loading="lazy" onerror="this.parentNode.innerHTML='&lt;div class=\'team-photo-placeholder\'&gt;&lt;/div&gt;'"></div>
+      <div class="team-info">
+        <h3>Dra. Patrícia Jezler</h3>
+        <div class="role">Oftalmologia Veterinária</div>
+        <p>Especialista na saúde ocular dos pets. Diagnostica e trata catarata, glaucoma, úlceras e outras doenças dos olhos com equipamentos específicos.</p>
+        <span class="team-badge">Oftalmologia</span>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo"><img src="dr-marco-aurelio-veterinario-guarulhos.png" alt="Dr. Marco Aurélio — médico veterinário de clínica geral na Clínica São Francisco em Guarulhos" loading="lazy" onerror="this.parentNode.innerHTML='&lt;div class=\'team-photo-placeholder\'&gt;&lt;/div&gt;'"></div>
+      <div class="team-info">
+        <h3>Dr. Marco Aurélio</h3>
+        <div class="role">Clínica Geral</div>
+        <p>Da consulta de rotina ao diagnóstico, acompanha a saúde geral do seu pet em cada fase da vida com atenção e cuidado.</p>
+        <span class="team-badge">Clínica Geral</span>
       </div>
     </div>
     <div class="team-card">
@@ -950,25 +968,46 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // FORM → WHATSAPP
-function submitForm(e) {
+// Cole aqui a URL do Inbound Webhook do seu workflow no Go High Level:
+const GHL_WEBHOOK_URL = 'COLE_AQUI_A_URL_DO_WEBHOOK_GHL';
+
+async function submitForm(e) {
   e.preventDefault();
-  const nome = document.getElementById('nome').value.trim();
-  const tel = document.getElementById('telefone').value.trim();
-  const petNome = document.getElementById('petNome').value.trim();
-  const petEsp = document.getElementById('petEspecie').value;
-  const servico = document.getElementById('servico').value;
-  const obs = document.getElementById('obs').value.trim();
+  const v = id => document.getElementById(id).value.trim();
+  const tel = v('telefone');
+  const payload = {
+    nome: v('nome'),
+    phone: '+55' + tel.replace(/\D/g, ''), // E.164 pro GHL
+    telefone: tel,
+    pet: v('petNome'),
+    especie: document.getElementById('petEspecie').value,
+    servico: v('servico'),
+    observacoes: v('obs'),
+    origem: 'site-saofrancisco'
+  };
 
-  const msg = `Olá! Gostaria de agendar um atendimento na Clínica São Francisco 🐾
+  const btn = e.target.querySelector('.btn-submit');
+  const orig = btn.innerHTML;
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
 
-*Nome:* ${nome}
-*WhatsApp:* ${tel}
-*Pet:* ${petNome}${petEsp ? ' (' + petEsp + ')' : ''}
-*Serviço:* ${servico}${obs ? '\n*Observações:* ' + obs : ''}
-
-Aguardo confirmação do horário. Obrigado(a)!`;
-
-  window.open('https://wa.me/5511950871596?text=' + encodeURIComponent(msg), '_blank');
+  try {
+    // no-cors + text/plain: POST chega no GHL sem preflight CORS (site estático)
+    await fetch(GHL_WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify(payload)
+    });
+    btn.textContent = '✓ Recebido! Em breve entramos em contato';
+    e.target.reset();
+  } catch (err) {
+    // fallback: não perde o lead se o webhook falhar
+    btn.innerHTML = orig;
+    btn.disabled = false;
+    const msg = `Olá! Gostaria de agendar na Clínica São Francisco 🐾\n\n*Nome:* ${payload.nome}\n*Pet:* ${payload.pet}${payload.especie ? ' (' + payload.especie + ')' : ''}\n*Serviço:* ${payload.servico}${payload.observacoes ? '\n*Obs:* ' + payload.observacoes : ''}`;
+    window.open('https://wa.me/5511950871596?text=' + encodeURIComponent(msg), '_blank');
+  }
 }
 
 // PHONE MASK
