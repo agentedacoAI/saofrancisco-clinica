@@ -1010,8 +1010,8 @@ async function submitForm(e) {
       headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
       body: JSON.stringify(payload)
     });
-    btn.textContent = '✓ Recebido! Em breve entramos em contato';
-    e.target.reset();
+    window.location.href = 'obrigado.html';
+    return;
   } catch (err) {
     // fallback: não perde o lead se o webhook falhar
     btn.innerHTML = orig;
