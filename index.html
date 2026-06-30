@@ -1007,7 +1007,7 @@ async function submitForm(e) {
     await fetch(GHL_WEBHOOK_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
     window.location.href = 'obrigado.html';
