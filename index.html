@@ -1012,12 +1012,10 @@ async function submitForm(e) {
   btn.textContent = 'Enviando...';
 
   try {
-    // dados via query params: GHL não aceita body sem Content-Type: application/json,
-    // e o browser bloqueia esse header em modo no-cors (site estático sem servidor)
-    const qs = new URLSearchParams(payload).toString();
-    await fetch(GHL_WEBHOOK_URL + '?' + qs, {
+    await fetch(GHL_WEBHOOK_URL, {
       method: 'POST',
-      mode: 'no-cors'
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
     window.location.href = 'obrigado.html';
     return;
